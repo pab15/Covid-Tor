@@ -15,8 +15,26 @@
 </center>
 <hr>
 <div class="container">
-    <p>
-        View the latest covid-19 news from reliable sources below.
-    </p>
+    <center>
+        <p>
+            View the latest covid-19 news from reliable sources below:
+        </p>
+    </center>
 </div>
+{% for article in article_list %}
+    <hr>
+    <div class="container">
+        <h2>{{article.title}}</h2>
+        <br>
+        <center>
+            <a href="{{article.url}}">{{article.url}}</a>
+            <p>By: {{article.author}}</p>
+            <p>Source: {{article.site}}</p>
+            <p>Article Fetched On: {{article.date}}</p>
+            <br>
+            <p>{{article.preview}}</p>
+        </center>
+        
+    </div>
+{% endfor %}
 {% endblock %}
