@@ -4,6 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        /* 
+            Created By: Christopher Martinez 
+            Last Modified: 3/16/19
+        */ 
+        h1,h2,h3
+        { 
+            text-align: center; 
+        }
+        .styledform
+        {
+            background-color: green;
+            margin-left: auto;
+            margin-right: auto;
+            width: 17.77em;
+            /*adding padding to the form so it can look more fancy*/
+            padding: 1em;
+
+        }
+
+        fieldset
+        {
+            color: wheat;
+            background-color: black;
+        }
+    </style>
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -22,6 +48,9 @@
                 </li>
                 <li class="nav-item {% block counts_active %}{% endblock %}">
                     <a class="nav-link" href="{{url_for('counts')}}">Counts</a>
+                </li>
+                <li class="nav-item {% block symptoms_active %}{% endblock %}">
+                    <a class="nav-link" href="{{url_for('symptoms')}}">Symptoms</a>
                 </li>
             </ul>
             {% block search_active %}{% endblock %}

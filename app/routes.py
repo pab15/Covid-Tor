@@ -1,7 +1,7 @@
 import os
 import sqlite3
-from app.dbmodels import News
-from app import app, db
+import datetime
+from app import app
 from flask import render_template
 
 @app.route('/')
@@ -15,3 +15,7 @@ def news():
 @app.route('/counts')
 def counts():
     return render_template('counts.html')
+
+@app.route('/symptoms')
+def symptoms():
+    return render_template('symptom.html')

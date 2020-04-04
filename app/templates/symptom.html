@@ -1,23 +1,18 @@
-<!DOCTYPE html>
-
-<head>
-    <title> Symptoms </title>
-
-    <link href="standard.css"
-          type="text/css" rel="stylesheet" />
-</head>
-
+{% extends "template.html" %}
+{% block title %}Symptoms{% endblock %}
+{% block symptoms_active %}active{% endblock %}
+{% block body %}
 <body>
-	<form>
+	<form class="styledform">
         <div class="container">
             <h3> Possible Symptoms: </h3>
         </div>
 	</form>
 	<br>
-	<form>
+	<form class="styledform">
         <div class="container">
             <h3> Potential Treatment Symptoms: </h3>
      	</div>
 	</form>
 </body>
-</html>
+{% endblock %}
