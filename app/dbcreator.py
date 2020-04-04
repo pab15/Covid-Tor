@@ -6,6 +6,9 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 import urllib.request, urllib.parse, urllib.error
 
+class AppURLopener(urllib.request.FancyURLopener):
+    version = "Mozilla/5.0"
+
 def grab_ny_news():
     conn = sqlite3.connect('data.db')
     curs = conn.cursor()
@@ -39,7 +42,59 @@ def grab_ny_news():
     conn.commit()
     conn.close()
 
-            
+def grab_counts():
+    conn = sqlite3.connect('data.db')
+    curs = conn.cursor()
+    result = []
+    url = 'https://www.worldometers.info/coronavirus/'
+    opener = AppURLopener()
+    response = opener.open('https://www.worldometers.info/coronavirus/')
+    html = response.read()
+    soup = BeautifulSoup(html, 'html.parser')
+    data = soup.find_all('tr')
+    count = 0
+    end = False
+    for dt in data:
+        if end == True:
+            break
+        else:
+            dta = dt.find_all('td')
+            col_count = 0
+            done = False
+            for d in dta:
+                if d.string == 'Total:':
+                    end = False
+                    break
+                else:
+                    if col_count == 0:
+                        location = d.string
+                        print(location)
+                    if col_count == 1:
+                        if d.string == "None" or d.string == "":
+                            total_cases = 0
+                        else:
+                            total_cases = int(d.string.replace(",", ""))
+                            print(total_cases)
+                    col_count += 1
+                    if col_count == 3:
+                        if d.string == None or d.string == "":
+                            total_deaths = 0
+                        else:
+                            total_deaths = int(d.string.replace(",", ""))
+                        print(total_deaths)
+                        done = True
+                    if done == True:
+                        date = datetime.now().strftime("%B %d, %Y %I:%M")
+                        curs.execute('SELECT country, date FROM "countrycounts" WHERE country=? AND date=?', (location, date))
+                        check_country = curs.fetchone()
+                        if check_country:
+                            pass
+                        else:
+                            curs.execute("INSERT INTO countrycounts(country, casescount, deathcount, date) VALUES('{}', '{}', '{}','{}')".format(location, total_cases, total_deaths, date))
+                        done = False    
+    conn.commit()
+    conn.close()
+
         
 
 def build_db():
@@ -58,5 +113,6 @@ def refresh_db():
     #watch --interval=3600 command
 
 if __name__ == '__main__':
-    grab_ny_news()
-    build_db()
+    # build_db()
+    grab_counts()
+    
