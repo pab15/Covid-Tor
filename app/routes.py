@@ -1,4 +1,7 @@
-from app import app
+import os
+import sqlite3
+from app.dbmodels import News
+from app import app, db
 from flask import render_template
 
 @app.route('/')
