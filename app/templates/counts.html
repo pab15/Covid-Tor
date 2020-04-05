@@ -8,15 +8,18 @@
 {% endblock %}
 {% block counts_active %}active{% endblock %}
 {% block body %}
-<center>
-    <h1>
-        Current Counts
-    </h1>
-</center>
-<hr>
+<div class="container">
+    <center>
+        <h1>
+            Current Counts
+        </h1>
+    </center>
+    <hr>
+</div>
 <body>
+<center>
     <div class="container">
-        <div class="split right">
+        <div class="splitover">
             <center>
                 <p class="lead">View the current covid-19 counts by country/state below:</p>
             </center>
@@ -35,7 +38,7 @@
                 {% endfor %}
             </center>
         </div>
-        <div class="split left">
+        <div class="splitover">
             <center>
                 <p class="lead">View the current covid-19 counts of all countries below:</p>
                 <table>
@@ -57,5 +60,8 @@
             </center>
         </div>
     </div>
+</center>
 </body>
+<br>
+<br>
 {% endblock %}
