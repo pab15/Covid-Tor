@@ -64,7 +64,7 @@ Now we install flask:
 
 ## STEP 5:
 Finally we Export: 
-### `export FLASK_APP=microblog.py`
+### `export FLASK_APP=tor.py`
 
 ## STEP 6: 
 ### `flask run`
