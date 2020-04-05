@@ -48,7 +48,7 @@ def country_map():
   static_path = os.getcwd()
   print(static_path)
   plt.title("Corona Virus Cases World Wide")
-  plt.savefig(static_path + r"\app\static\countrymap.png")
+  plt.savefig(static_path + r"\app\static\images\countrymap.png")
 
 
 def state_map():
@@ -93,7 +93,7 @@ def state_map():
   static_path = os.getcwd()
   print(static_path)
   plt.title("Corona Virus Cases In USA")
-  plt.savefig(static_path + r"\app\static\statemap.png")
+  plt.savefig(static_path + r"\app\static\images\statemap.png")
 
 country_map()
 state_map()

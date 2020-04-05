@@ -49,8 +49,24 @@ class CaseList:
         self.list.append(LocationCases(location, date, casecount, deathcount)) 
 
     def sort_cases(self):
-        self.list.sort(key=lambda r: r.date)
-        self.list.reverse()
+        date_dict = {}
+        key_array = []
+        for x in self.list:
+            str_date = x.date.strftime("%d %m, %Y")
+            if str_date in date_dict:
+                date_dict[str_date].append(x)
+            else:
+                date_dict[str_date] = [x]
+        for key in date_dict:
+            key_array.append(key)
+            date_dict[key].sort(key=lambda x: x.casecount, reverse = True)
+        key_array.sort(key=lambda date: date)
+        key_array.reverse()
+        new_list = []
+        for key in key_array:
+            for item in date_dict[key]:
+                new_list.append(item)
+        self.list = new_list
 
 def create_article_list():
     conn = sqlite3.connect('data.db')
@@ -87,3 +103,5 @@ def create_state_list():
     conn.commit()
     conn.close()
     return c.list
+
+create_country_list()
