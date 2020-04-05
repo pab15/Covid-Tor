@@ -8,6 +8,7 @@
 {% endblock %}
 {% block news_active %}active{% endblock %}
 {% block body %}
+
 <center>
     <h1>
         News
@@ -24,7 +25,8 @@
 {% for article in article_list %}
     <hr>
     <div class="container">
-        <div class="title"> </div><center> <h2>{{article.title}}</h2> </center> </div>
+        <center> <h2 id = "title">{{article.title}}</h2> </center> 
+    </div>
         <br>
         <center>
             <a href="{{article.url}}">{{article.url}}</a>
@@ -34,6 +36,8 @@
             <br>
             <p>{{article.preview}}</p>
         </center>
+        <br/>
+        <br/>
         
     </div>
 {% endfor %}

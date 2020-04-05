@@ -33,6 +33,12 @@ body{
     transform: translate(-49%, -49%);
   }
 
- 
+ #title{
+     background-color: lightslategrey;
+     font-size: 2.77em;
+     border-radius: 49px;
+ }
+
+
   
   
