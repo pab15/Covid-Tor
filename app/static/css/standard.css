@@ -4,6 +4,7 @@ body{
     background-color: rgb(182, 137, 119);
     text-align: center;
 }
+
 .split {
     height: 100%;
     width: 50%;
@@ -60,7 +61,6 @@ body{
 
  #web_link{
      font-size:1.1em;
-     background-color: rgb(199, 203, 0);
  }
 
  #author{ 
