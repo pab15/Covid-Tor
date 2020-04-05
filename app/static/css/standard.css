@@ -1,7 +1,7 @@
 /* This CSS file is modified from this link: 
 https://www.w3schools.com/howto/howto_css_split_screen.asp */ 
 body{
-    background-color: rgb(182, 137, 119);
+    background-color: rgb(203, 163, 110);
     text-align: center;
 }
 
@@ -67,7 +67,7 @@ tr:hover {
   /* Control the left side */
   .left {
     left: 0;
-    background-color: rgb(182, 137, 119);
+    background-color: rgb(203, 163, 110);
   }
   
   /* Control the right side */
@@ -92,6 +92,38 @@ tr:hover {
     display: inline-block;
     ;
  }
+
+ .symp{
+  border-style: inset;
+  border-width: .7em;
+  border-color: black;
+  background-color: lightslategrey;
+  border-radius: 5px;
+  display: inline-block;
+  text-align: center;
+  ;
+}
+
+.treat{
+  border-style: inset;
+  border-width: .7em;
+  border-color: black;
+  background-color: rgb(203, 163, 110);
+  border-radius: 5px;
+  display: inline-block;
+  text-align: center;
+  ;
+}
+
+.options{
+  border-style: dotted;
+  border-width: 17%;
+  border-color: black;
+  border-radius: 5px;
+  display: inline-block;
+  text-align: left;
+  ;
+}
 
  #title{
      background-color: lightslategrey;
