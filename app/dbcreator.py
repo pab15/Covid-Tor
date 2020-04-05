@@ -48,7 +48,7 @@ def grab_counts():
     result = []
     url = 'https://www.worldometers.info/coronavirus/'
     opener = AppURLopener()
-    response = opener.open('https://www.worldometers.info/coronavirus/')
+    response = opener.open(url)
     html = response.read()
     soup = BeautifulSoup(html, 'html.parser')
     data = soup.find_all('tr')
@@ -95,7 +95,58 @@ def grab_counts():
     conn.commit()
     conn.close()
 
-        
+def grab_state_counts():
+    conn = sqlite3.connect('data.db')
+    curs = conn.cursor()
+    result = []
+    url = 'https://www.worldometers.info/coronavirus/country/us/'
+    opener = AppURLopener()
+    response = opener.open(url)
+    html = response.read()
+    soup = BeautifulSoup(html, 'html.parser')
+    data = soup.find_all('tr')
+    count = 0
+    end = False
+    for dt in data:
+        if end == True:
+            break
+        else:
+            dta = dt.find_all('td')
+            col_count = 0
+            done = False
+            for d in dta:
+                if d.string == 'Total:':
+                    end = False
+                    break
+                else:
+                    if col_count == 0:
+                        location = d.string
+                        print(location)
+                    if col_count == 1:
+                        if d.string == "None" or d.string == "" or d.string == " " or d.string == "\n":
+                            total_cases = 0
+                        else:
+                            total_cases = int(d.string.replace(",", ""))
+                            print(total_cases)
+                    if col_count == 3:
+                        if d.string == None or d.string == "" or d.string == " " or d.string == "\n":
+                            total_deaths = 0
+                        else:
+                            total_deaths = int(d.string.replace(",", ""))
+                        print(total_deaths)
+                        done = True
+                    if done == True:
+                        date = datetime.now().strftime("%B %d, %Y")
+                        curs.execute('SELECT state, date FROM "statecounts" WHERE state=? AND date=?', (location, date))
+                        check_state = curs.fetchone()
+                        if check_state:
+                            pass
+                        else:
+                            curs.execute("INSERT INTO statecounts(state, casescount, deathcount, date) VALUES('{}', '{}', '{}','{}')".format(location, total_cases, total_deaths, date))
+                        done = False    
+                    col_count += 1
+    conn.commit()
+    conn.close()        
 
 def build_db():
     conn = sqlite3.connect('data.db')
@@ -104,6 +155,8 @@ def build_db():
                     (id INTEGER PRIMARY KEY, url STRING, site STRING, title STRING, author STRING, preview STRING, date STRING)''')
     curs.execute('''CREATE TABLE IF NOT EXISTS countrycounts
                     (id INTEGER PRIMARY KEY, country STRING, casescount INTEGER, deathcount INTEGER, date STRING)''')
+    curs.execute('''CREATE TABLE IF NOT EXISTS statecounts
+                    (id INTEGER PRIMARY KEY, state STRING, casescount INTEGER, deathcount INTEGER, date STRING)''')
     conn.commit()
     conn.close()
 
@@ -113,8 +166,11 @@ def refresh_db():
     #watch --interval=3600 command
     grab_counts()
     print('grabbing counts...')
+    grab_state_counts()
+    print('grabbing counts...')
+
 
 if __name__ == '__main__':
-    # build_db()
+    build_db()
     refresh_db()
     

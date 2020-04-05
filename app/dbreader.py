@@ -75,3 +75,15 @@ def create_country_list():
     conn.commit()
     conn.close()
     return c.list
+
+def create_state_list():
+    conn = sqlite3.connect('data.db')
+    curs = conn.cursor()
+    c = CaseList()
+    curs.execute('''SELECT state, date, casescount, deathcount from statecounts''')
+    for location in curs:
+        c.add_location(location[0], location[1], location[2], location[3])
+    c.sort_cases()
+    conn.commit()
+    conn.close()
+    return c.list

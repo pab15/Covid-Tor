@@ -18,13 +18,14 @@ def news():
 def counts():
     data = {}
     case_data = create_country_list()
+    case_data_us = create_state_list()
     if request.method == 'POST':
         conn = sqlite3.connect('data.db')
         curs = conn.cursor()
         if request.form.get('USA') == 'USA':
             location = request.form['location']
             date = datetime.now().strftime("%B %d, %Y")
-            curs.execute('SELECT country, date, casescount, deathcount FROM "countrycounts" WHERE country=? AND date=?', (location, date))
+            curs.execute('SELECT state, date, casescount, deathcount FROM "statecounts" WHERE state=? AND date=?', (location, date))
             check_state = curs.fetchone()
             if check_state:
                 data["country"] = check_state[0]
@@ -34,7 +35,7 @@ def counts():
                 return render_template('statecounts.html', data=data)
             else:
                 flash('State not found in database!')
-                return render_template('counts.html', case_data=case_data)
+                return render_template('counts.html', case_data=case_data, case_data_us=case_data_us)
         else:
             location = request.form['location']
             date = datetime.now().strftime("%B %d, %Y")
@@ -52,10 +53,10 @@ def counts():
                 return render_template('countrycounts.html', data=data)
             else:
                 flash('Country not found in database!')
-                return render_template('counts.html', case_data=case_data)
+                return render_template('counts.html', case_data=case_data, case_data_us=case_data_us)
         conn.close()
     else:
-        return render_template('counts.html', case_data=case_data)
+        return render_template('counts.html', case_data=case_data, case_data_us=case_data_us)
 
 @app.route('/symptoms')
 def symptoms():
