@@ -43,18 +43,29 @@
                 <p class="lead">View the current covid-19 counts of all countries below:</p>
                 <table>
                     <tr>
-                        <th>Country</th>
-                        <th>Date</th>
-                        <th>Case Count</th>
-                        <th>Death Count</th>
+                        <th class="normal">Country</th>
+                        <th class="normal">Date</th>
+                        <th class="normal">Case Count</th>
+                        <th class="normal">Death Count</th>
                     </tr>
+                    {% set count = namespace(value=1) %}
                     {% for row in case_data %}
-                        <tr>
-                            <th>{{row.location}}</th>
-                            <th>{{row.date.strftime("%B %d, %Y")}}</th>
-                            <th>{{row.casecount}}</th>
-                            <th>{{row.deathcount}}</th>
-                        </tr>
+                        {% if count.value % 2 == 0 %}
+                            <tr class="even">
+                                <td class="normal">{{row.location}}</td>
+                                <td class="normal">{{row.date.strftime("%B %d, %Y")}}</td>
+                                <td class="case">{{row.casecount}}</td>
+                                <td class="case">{{row.deathcount}}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td class="normal">{{row.location}}</td>
+                                <td class="normal">{{row.date.strftime("%B %d, %Y")}}</td>
+                                <td class="case">{{row.casecount}}</td>
+                                <td class="case">{{row.deathcount}}</td>
+                            </tr>
+                        {% endif %}
+                        {% set count.value = count.value + 1 %}
                     {% endfor %}
                 </table>
             </center>

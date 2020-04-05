@@ -17,6 +17,7 @@ def news():
 @app.route('/counts', methods=['POST', 'GET'])
 def counts():
     data = {}
+    case_data = create_country_list()
     if request.method == 'POST':
         conn = sqlite3.connect('data.db')
         curs = conn.cursor()
@@ -33,7 +34,7 @@ def counts():
                 return render_template('statecounts.html', data=data)
             else:
                 flash('State not found in database!')
-                return render_template('counts.html')
+                return render_template('counts.html', case_data=case_data)
         else:
             location = request.form['location']
             date = datetime.now().strftime("%B %d, %Y")
@@ -51,12 +52,15 @@ def counts():
                 return render_template('countrycounts.html', data=data)
             else:
                 flash('Country not found in database!')
-                return render_template('counts.html')
+                return render_template('counts.html', case_data=case_data)
         conn.close()
     else:
-        case_data = create_country_list()
         return render_template('counts.html', case_data=case_data)
 
 @app.route('/symptoms')
 def symptoms():
     return render_template('symptom.html')
+
+@app.route('/favicon.ico')
+def faviconico():
+    return ""
