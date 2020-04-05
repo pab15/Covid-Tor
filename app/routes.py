@@ -54,7 +54,8 @@ def counts():
                 return render_template('counts.html')
         conn.close()
     else:
-        return render_template('counts.html')
+        case_data = create_country_list()
+        return render_template('counts.html', case_data=case_data)
 
 @app.route('/symptoms')
 def symptoms():

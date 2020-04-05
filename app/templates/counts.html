@@ -14,23 +14,48 @@
     </h1>
 </center>
 <hr>
-<div class="container">
-    <center>
-        <p class="lead">View the current covid-19 counts by country/state below:</p>
-    </center>
-    <center>
-        <form action="" method="POST">
-            <p><input type="text" value="" name="location"></p>
-            <input type="checkbox" id="USA" name="USA" value="USA">
-            <label for="USA">Check my state instead</label><br>
-            <p><input type="submit" name="submit"></p>
-        </form>
-        {% for message in get_flashed_messages() %}
-            <div class="alert alert-warning">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{ message }}
-            </div>
-        {% endfor %}
-    </center>
-</div>
+<body>
+    <div class="container">
+        <div class="split right">
+            <center>
+                <p class="lead">View the current covid-19 counts by country/state below:</p>
+            </center>
+            <center>
+                <form action="" method="POST">
+                    <p><input type="text" value="" name="location"></p>
+                    <input type="checkbox" id="USA" name="USA" value="USA">
+                    <label for="USA">Check my state instead</label><br>
+                    <p><input type="submit" name="submit"></p>
+                </form>
+                {% for message in get_flashed_messages() %}
+                    <div class="alert alert-warning">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </center>
+        </div>
+        <div class="split left">
+            <center>
+                <p class="lead">View the current covid-19 counts of all countries below:</p>
+                <table>
+                    <tr>
+                        <th>Country</th>
+                        <th>Date</th>
+                        <th>Case Count</th>
+                        <th>Death Count</th>
+                    </tr>
+                    {% for row in case_data %}
+                        <tr>
+                            <th>{{row.location}}</th>
+                            <th>{{row.date.strftime("%B %d, %Y")}}</th>
+                            <th>{{row.casecount}}</th>
+                            <th>{{row.deathcount}}</th>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </center>
+        </div>
+    </div>
+</body>
 {% endblock %}

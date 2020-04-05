@@ -33,6 +33,23 @@ class ArticleList:
     def sort_articles(self):
         self.list.sort(key=lambda r: r.date)
 
+class LocationCases:
+    def __init__(self, location, date, casecount, deathcount):
+        self.location = location
+        self.date = datetime.strptime(date, "%B %d, %Y")
+        self.casecount = casecount
+        self.deathcount = deathcount
+
+class CaseList:
+    def __init__(self):
+        self.list = []
+    
+    def add_location(self, location, date, casecount, deathcount):
+        self.list.append(LocationCases(location, date, casecount, deathcount)) 
+
+    def sort_cases(self):
+        self.list.sort(key=lambda r: r.date)
+
 def create_article_list():
     conn = sqlite3.connect('data.db')
     curs = conn.cursor()
@@ -44,3 +61,15 @@ def create_article_list():
     conn.commit()
     conn.close()
     return a.list
+
+def create_country_list():
+    conn = sqlite3.connect('data.db')
+    curs = conn.cursor()
+    c = CaseList()
+    curs.execute('''SELECT country, date, casescount, deathcount from countrycounts''')
+    for location in curs:
+        c.add_location(location[0], location[1], location[2], location[3])
+    c.sort_cases()
+    conn.commit()
+    conn.close()
+    return c.list
