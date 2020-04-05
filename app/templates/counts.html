@@ -24,7 +24,7 @@
                 <p class="lead">View the Current Covid-19 Counts by Country/State Below, or Query Your Location:</p>
             </center>
             <center>
-                <form action="" method="POST">
+                <form action="{{url_for('counts')}}" method="POST">
                     <p><input type="text" value="" name="location"></p>
                     <input type="checkbox" id="USA" name="USA" value="USA">
                     <label for="USA">Check my state instead</label><br>
