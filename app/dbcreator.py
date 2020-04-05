@@ -116,20 +116,20 @@ def grab_state_counts():
             done = False
             for d in dta:
                 if d.string == 'Total:':
-                    end = False
+                    end = True
                     break
                 else:
                     if col_count == 0:
                         location = d.string.rstrip(" ").lstrip(" ").replace("\n", "")
                         print(location)
                     if col_count == 1:
-                        if d.string == "None" or d.string == "" or d.string == " " or d.string == "\n":
+                        if d.string == None or d.string == "" or d.string == " " or d.string == "\n":
                             total_cases = 0
                         else:
                             total_cases = int(d.string.replace(",", ""))
                             print(total_cases)
                     if col_count == 3:
-                        if d.string == None or d.string == "" or d.string == " " or d.string == "\n":
+                        if d.string == None or d.string == "" or d.string == " " or d.string == "\n" or d.string == "\xa0":
                             total_deaths = 0
                         else:
                             total_deaths = int(d.string.replace(",", ""))
