@@ -70,21 +70,20 @@ def grab_counts():
                         location = d.string
                         print(location)
                     if col_count == 1:
-                        if d.string == "None" or d.string == "":
+                        if d.string == "None" or d.string == "" or d.string == " ":
                             total_cases = 0
                         else:
                             total_cases = int(d.string.replace(",", ""))
                             print(total_cases)
-                    col_count += 1
                     if col_count == 3:
-                        if d.string == None or d.string == "":
+                        if d.string == None or d.string == "" or d.string == " ":
                             total_deaths = 0
                         else:
                             total_deaths = int(d.string.replace(",", ""))
                         print(total_deaths)
                         done = True
                     if done == True:
-                        date = datetime.now().strftime("%B %d, %Y %I:%M")
+                        date = datetime.now().strftime("%B %d, %Y")
                         curs.execute('SELECT country, date FROM "countrycounts" WHERE country=? AND date=?', (location, date))
                         check_country = curs.fetchone()
                         if check_country:
@@ -92,6 +91,7 @@ def grab_counts():
                         else:
                             curs.execute("INSERT INTO countrycounts(country, casescount, deathcount, date) VALUES('{}', '{}', '{}','{}')".format(location, total_cases, total_deaths, date))
                         done = False    
+                    col_count += 1
     conn.commit()
     conn.close()
 
@@ -111,6 +111,8 @@ def refresh_db():
     grab_ny_news()
     print('fetching articles...')
     #watch --interval=3600 command
+    grab_counts()
+    print('grabbing counts...')
 
 if __name__ == '__main__':
     # build_db()
