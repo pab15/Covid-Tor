@@ -25,13 +25,17 @@ def counts():
         if request.form.get('USA') == 'USA':
             location = request.form['location']
             date = datetime.now().strftime("%B %d, %Y")
-            curs.execute('SELECT state, date, casescount, deathcount FROM "statecounts" WHERE state=? AND date=?', (location, date))
+            curs.execute('SELECT state FROM "statecounts" WHERE state=? AND date=?', (location, date))
             check_state = curs.fetchone()
             if check_state:
-                data["country"] = check_state[0]
-                data["date"] = check_state[1]
-                data["cases"] = check_state[2]
-                data["deaths"] = check_state[3]
+                data['country'] = location
+                data['date'] = date
+                curs.execute('SELECT casescount FROM "statecounts" WHERE state=? AND date=?', (location, date))
+                cases = curs.fetchone()
+                data['cases'] = str(cases[0])
+                curs.execute('SELECT deathcount FROM "statecounts" WHERE state=? AND date=?', (location, date))
+                deaths = curs.fetchone()
+                data['deaths'] = str(deaths[0])
                 return render_template('statecounts.html', data=data)
             else:
                 flash('State not found in database!')

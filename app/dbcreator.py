@@ -120,7 +120,7 @@ def grab_state_counts():
                     break
                 else:
                     if col_count == 0:
-                        location = d.string
+                        location = d.string.rstrip(" ").lstrip(" ").replace("\n", "")
                         print(location)
                     if col_count == 1:
                         if d.string == "None" or d.string == "" or d.string == " " or d.string == "\n":
