@@ -116,5 +116,5 @@ def refresh_db():
 
 if __name__ == '__main__':
     # build_db()
-    grab_counts()
+    refresh_db()
     

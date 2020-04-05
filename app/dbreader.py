@@ -32,6 +32,7 @@ class ArticleList:
 
     def sort_articles(self):
         self.list.sort(key=lambda r: r.date)
+        self.list.reverse()
 
 class LocationCases:
     def __init__(self, location, date, casecount, deathcount):
@@ -49,6 +50,7 @@ class CaseList:
 
     def sort_cases(self):
         self.list.sort(key=lambda r: r.date)
+        self.list.reverse()
 
 def create_article_list():
     conn = sqlite3.connect('data.db')
