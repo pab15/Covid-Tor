@@ -2,6 +2,7 @@
 https://www.w3schools.com/howto/howto_css_split_screen.asp */ 
 body{
     background-color: rgb(182, 137, 119);
+    text-align: center;
 }
 .split {
     height: 100%;
@@ -33,12 +34,40 @@ body{
     transform: translate(-49%, -49%);
   }
 
+ .info{
+    border-style: dotted;
+    border-width: 17%;
+    border-color: black;
+    border-radius: 5px;
+    display: inline-block;
+    ;
+ }
+
  #title{
      background-color: lightslategrey;
      font-size: 2.77em;
      border-radius: 49px;
  }
 
+ #web_link{
+     font-size:1.1em;
+     background-color: rgb(199, 203, 0);
+ }
 
+ #author{ 
+     font-size: 2.2em;
+ }
+
+ #source{ 
+     font-size: 1.49em;
+ }
+
+ #fetch_date{
+     font-size: smaller;
+ }
+
+ #article_preview{ 
+     font-size: x-large;
+ }
   
   

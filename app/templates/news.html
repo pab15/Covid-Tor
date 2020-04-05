@@ -27,14 +27,19 @@
     <div class="container">
         <center> <h2 id = "title">{{article.title}}</h2> </center> 
     </div>
-        <br>
+        <br/>
         <center>
-            <a href="{{article.url}}">{{article.url}}</a>
-            <p>By: {{article.author}}</p>
-            <p>Source: {{article.site}}</p>
-            <p>Article Fetched On: {{article.date}}</p>
+            <a href="{{article.url}}" id = "web_link">{{article.url}}</a>
+            <br/>
+            <center> 
+                <div class = "info"> 
+                    <p id = "author">By: {{article.author}}</p>
+                    <p id = "source">Source: {{article.site}}</p>
+                    <p id = "fetch_date">Article Fetched On: {{article.date}}</p>
+                </div> 
+            </center>
             <br>
-            <p>{{article.preview}}</p>
+            <p id = "article_preview">{{article.preview}}</p>
         </center>
         <br/>
         <br/>
