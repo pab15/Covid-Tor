@@ -1,39 +1,36 @@
 # Covid-Tor
-Tor based website for viewing Coronavirus news and numbers. Written in Flask.
+2020 Humboldt State University 1st Place Hackathon Project. Tor based website for viewing Coronavirus news and numbers. Uses Python backend (Flask, Basemap, Beautiful Soup 4, Matplotlib), HTML frontend (CSS, Bootstrap, Jinja2), SQLite3 database, and was deployed on Ubuntu Server using Nginx, Gunicorn, and Tor.
 
 ## Imports for application:
 ---
-pip install flask
-pip install beautifulsoup4
-pip install matplotlib
-pip install numpy
+- pip install flask
+- pip install beautifulsoup4
+- pip install matplotlib
+- pip install numpy
 
 ### Basemap:
-https://www.lfd.uci.edu/~gohlke/pythonlibs/
-ctrl+f --> basemap
-download appropriate whl file for system
-move whl file to project directory
-ex:
-pip install basemap-1.2.1-cp38-cp38-win_amd64
+- https://www.lfd.uci.edu/~gohlke/pythonlibs/
+- ctrl+f --> basemap
+- download appropriate whl file for system
+- move whl file to project directory
+- ex:
+- pip install basemap-1.2.1-cp38-cp38-win_amd64
 
 ## Imports for server:
 ---
-apt install tor
-apt install nginx
-pip install gunicorn
+- apt install tor
+- apt install nginx
+- pip install gunicorn
 
 <br/>
 <br/>
 <br/>
 
-# Running Website on TOR Browser: 
-
-## Make sure to have TOR installed, here is the link: 
+## To view project, make sure to have Tor Browser installed, here is the link: 
 https://www.torproject.org/download/
 
-## Project Url:
+## Project Url (If you build this project, link will be different):
 http://vlvfd2av3kmod5alkegykwtblaogtzknkcnlt642yasko5lyj76o4lyd.onion
-
 
 
 <br/>
@@ -42,19 +39,19 @@ http://vlvfd2av3kmod5alkegykwtblaogtzknkcnlt642yasko5lyj76o4lyd.onion
 
 # Running website without TOR Browser: 
 ## STEP 1:
-Clone/Download this repository
-Go to your Command Prompt and type in the folowing: 
+- Clone/Download this repository
+- Go to your Command Prompt and type in the folowing: 
 ### `cd Covid-Tor`
 
 ## STEP 2:
-Then afteer that type in: 
+Activate Virtual Environment: 
 ### `python3 -m venv venv`
-
 
 #### ONLY IF USING PYTHON 3.4 OR OLDER:
 ### `virtualenv venv`
 
 ## STEP 3:
+Activate Virtual Environment:
 ### ON MAC AND LINUX: `source venv/bin/activate`
 ### ON WINDOWS: `.\venv\Scripts\Activate.ps1`
 
@@ -104,9 +101,9 @@ Next Install All Pip dependencies for your project
 
 ## Set nginx enabled sites:
 Remove (or unlink) Default Config:
-### sudo rm /etc/nginx/sites-enabled/default`
+### `sudo rm /etc/nginx/sites-enabled/default`
 Add New Config For Project:
-### sudo nano /etc/nginx/sites-enabled/[projectfoldername]
+### `sudo nano /etc/nginx/sites-enabled/[projectfoldername]`
 
 Add Lines:
 `server {
